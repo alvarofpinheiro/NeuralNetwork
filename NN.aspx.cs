@@ -525,7 +525,7 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
-    //Forward e Backword (backpropagation)
+    //Forward e Backward (backpropagation)
     public static ArrayList Forward()
     {
         //Ciclos
@@ -856,8 +856,16 @@ public partial class _Default : System.Web.UI.Page
                     {
                         try
                         {
-                            double nElemento = Math.Round(Convert.ToDouble(alEntrada[j].ToString().Replace("\n", "").Replace(".", ",")), nDecimais);
-                            novasEntradasIniciais[i, j] = nElemento;
+                            if (DropDownListSeparador.SelectedValue == "Vírgula")
+                            {
+                                double nElemento = Math.Round(Convert.ToDouble(alEntrada[j].ToString().Replace("\n", "").Replace(".", ",")), nDecimais);
+                                novasEntradasIniciais[i, j] = nElemento;
+                            }
+                            else
+                            {
+                                double nElemento = Math.Round(Convert.ToDouble(alEntrada[j].ToString().Replace("\n", "").Replace(",", ".")), nDecimais);
+                                novasEntradasIniciais[i, j] = nElemento;
+                            }
                         }
                         catch
                         {
@@ -890,8 +898,16 @@ public partial class _Default : System.Web.UI.Page
                     {
                         try
                         {
-                            double nElemento = Math.Round(Convert.ToDouble(alSaida[j].ToString().Replace("\n", "").Replace(".", ",")), nDecimais);
-                            novasSaidasIniciais[i, j] = nElemento;
+                            if (DropDownListSeparador.SelectedValue == "Vírgula")
+                            {
+                                double nElemento = Math.Round(Convert.ToDouble(alSaida[j].ToString().Replace("\n", "").Replace(".", ",")), nDecimais);
+                                novasSaidasIniciais[i, j] = nElemento;
+                            }
+                            else
+                            {
+                                double nElemento = Math.Round(Convert.ToDouble(alSaida[j].ToString().Replace("\n", "").Replace(",", ".")), nDecimais);
+                                novasSaidasIniciais[i, j] = nElemento;
+                            }
                         }
                         catch
                         {

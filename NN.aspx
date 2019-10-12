@@ -239,6 +239,12 @@
                         Visible="False" />
                     <asp:Button ID="ButtonTreinar" runat="server" Text="Treinar" Font-Bold="True" OnClick="ButtonTreinar_Click"
                         Width="60px" ToolTip="Inicia o treinamento da Rede Neural Artificial (RNA) modelo MLP" />
+                    <asp:DropDownList ID="DropDownListSeparador" runat="server" AutoPostBack="True" 
+                        onselectedindexchanged="DropDownListAtivacao_SelectedIndexChanged" 
+                        ToolTip="Separador de decimais" Font-Names="Courier New">
+                        <asp:ListItem Selected="True">Ponto</asp:ListItem>
+                        <asp:ListItem>Vírgula</asp:ListItem>
+                    </asp:DropDownList>
                     <asp:Label ID="LabelLimite" runat="server" Font-Bold="True" Text="Limite" 
                         ForeColor="Red" Visible="False"></asp:Label>
                     <asp:TextBox ID="TextBoxLimite" runat="server" Width="50px" ToolTip="Limite máximo de linhas da matriz (força saída do treinamento)"
@@ -337,6 +343,9 @@
                 <td style="vertical-align: top; text-align: left;" width="100%">
                     <asp:Label ID="LabelAutoria" runat="server" Font-Bold="False" Text="alvarofpinheiro (09/10/2019)"
                         ToolTip="Autoria"></asp:Label>
+                    <asp:HyperLink ID="hub" runat="server" 
+                        NavigateUrl="https://github.com/alvarofpinheiro/NeuralNetwork" Target="_blank" 
+                        ToolTip="fontes">https://github.com/alvarofpinheiro/NeuralNetwork</asp:HyperLink>
                 </td>
             </tr>
         </table>
