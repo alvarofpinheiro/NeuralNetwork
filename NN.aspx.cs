@@ -671,11 +671,214 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
+    //Função de ativação
+    protected void DropDownListAtivacao_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownListAtivacao.SelectedValue == "Linear")
+        {
+            DropDownListAtivacao.ToolTip = "f(x)=x | f'(x)=x";
+            LabelMensagem.Text = "[Função de ativação não implementada]";
+        }
+        else if (DropDownListAtivacao.SelectedValue == "Degrau")
+        {
+            DropDownListAtivacao.ToolTip = "f(x)=1; se x>=0->0:1 | f'(x)=?; se x=0->0";
+            LabelMensagem.Text = "[Função de ativação não implementada]";
+        }
+        else if (DropDownListAtivacao.SelectedValue == "Sigmóide")
+        {
+            DropDownListAtivacao.ToolTip = "f(x)=1/(1+e^(-x)) | f'(x)=f(x)(1-f(x))";
+            LabelMensagem.Text = "";
+        }
+        else if (DropDownListAtivacao.SelectedValue == "Hiperbólica")
+        {
+            DropDownListAtivacao.ToolTip = "f(x)=(e^x-e^-x)/(e^x+e^-x) | f'(x)=1-f(x)^2";
+            LabelMensagem.Text = "[Função de ativação não implementada]";
+        }
+        else if (DropDownListAtivacao.SelectedValue == "ReLu")
+        {
+            DropDownListAtivacao.ToolTip = "f(x)=x se x>=0->0 | f'(x)=1; se x>=0->0";
+            LabelMensagem.Text = "[Função de ativação não implementada]";
+        }
+        else if (DropDownListAtivacao.SelectedValue == "Leaky ReLu")
+        {
+            DropDownListAtivacao.ToolTip = "f(x)=x; se x>=0->0,01x | f'(x)=1; se x>=0->0,01";
+            LabelMensagem.Text = "[Função de ativação não implementada]";
+        }
+        else if (DropDownListAtivacao.SelectedValue == "Soft Max")
+        {
+            DropDownListAtivacao.ToolTip = "f(x)=(e^xi)/(ΣKj=1e^xj)";
+            LabelMensagem.Text = "[Função de ativação não implementada]";
+        }
+    }
+
+    //Tipos de normalização
+    protected void DropDownListNormalizacao_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownListNormalizacao.SelectedValue == "Simples")
+        {
+            DropDownListNormalizacao.ToolTip = "Simples: n/max(n) | n*max(n)";
+            LabelMensagem.Text = "[Função custo não implementada]";
+        }
+        else if (DropDownListNormalizacao.SelectedValue == "Linear")
+        {
+            DropDownListNormalizacao.ToolTip = "Linear: (b-a)*(n-min(n))/(max(n)-min(n))+a | (n-a)*(max(n)-min(n))/(b-a)+min(n)";
+            LabelMensagem.Text = "[Função custo não implementada]";
+        }
+    }
+
+    //Função custo
+    protected void DropDownListFuncaoCusto_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownListFuncaoCusto.SelectedValue == "EC")
+        {
+            DropDownListFuncaoCusto.ToolTip = "Entropia Cruzada: função custo para classificação";
+            LabelMensagem.Text = "[Função custo não implementada]";
+            CheckBoxCusto.Text = "EC";
+        }
+        else if (DropDownListFuncaoCusto.SelectedValue == "L1")
+        {
+            DropDownListFuncaoCusto.ToolTip = "Erro Médio Absoluto (EMA): função custo para predição";
+            LabelMensagem.Text = "[Função custo não implementada]";
+            CheckBoxCusto.Text = "EMA";
+        }
+        else if (DropDownListFuncaoCusto.SelectedValue == "L2")
+        {
+            DropDownListFuncaoCusto.ToolTip = "Erro Médio Quadrático (EMQ): função custo para predição";
+            LabelMensagem.Text = "";
+            CheckBoxCusto.Text = "EMQ";
+        }
+    }
+
+    //Avaliação de desempenho
+    protected void DropDownListDesempenho_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownListDesempenho.SelectedValue == "MSE")
+        {
+            DropDownListDesempenho.ToolTip = "MSE";
+            LabelMensagem.Text = "[Avaliação de desempenho não implementada]";
+        }
+        else if (DropDownListDesempenho.SelectedValue == "MAE")
+        {
+            DropDownListDesempenho.ToolTip = "MAE";
+            LabelMensagem.Text = "[Avaliação de desempenho não implementada]";
+        }
+        else if (DropDownListDesempenho.SelectedValue == "MAPE")
+        {
+            DropDownListDesempenho.ToolTip = "MAPE";
+            LabelMensagem.Text = "[Avaliação de desempenho não implementada]";
+        }
+        else if (DropDownListDesempenho.SelectedValue == "")
+        {
+            DropDownListDesempenho.ToolTip = "";
+            LabelMensagem.Text = "";
+        }
+    }
+
+    //Arquitetura da rede
+    protected void DropDownListArquitetura_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownListArquitetura.SelectedValue == "CNN")
+        {
+            DropDownListArquitetura.ToolTip = "Convolutional Neural Network";
+            LabelMensagem.Text = "[Arquitetura da rede não implementada]";
+        }
+        else if (DropDownListArquitetura.SelectedValue == "RNN")
+        {
+            DropDownListArquitetura.ToolTip = "Recurrent Neural Network";
+            LabelMensagem.Text = "[Arquitetura da rede não implementada]";
+        }
+        else if (DropDownListArquitetura.SelectedValue == "MLP")
+        {
+            DropDownListArquitetura.ToolTip = "Multilayer Perceptron";
+            LabelMensagem.Text = "";
+        }
+    }
+
+    //Algoritmo de otimização
+    protected void DropDownListOtimizacao_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownListOtimizacao.SelectedValue == "Momentum")
+        {
+            DropDownListOtimizacao.ToolTip = "Momentum";
+        }
+        else if (DropDownListOtimizacao.SelectedValue == "Adagrad")
+        {
+            DropDownListOtimizacao.ToolTip = "Adagrad";
+            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
+        }
+        else if (DropDownListOtimizacao.SelectedValue == "RMSprop")
+        {
+            DropDownListOtimizacao.ToolTip = "RMSProp";
+            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
+        }
+        else if (DropDownListOtimizacao.SelectedValue == "Adadelta")
+        {
+            DropDownListOtimizacao.ToolTip = "Adadelta";
+            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
+        }
+        else if (DropDownListOtimizacao.SelectedValue == "Nesterov")
+        {
+            DropDownListOtimizacao.ToolTip = "Nesterov";
+            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
+        }
+        else if (DropDownListOtimizacao.SelectedValue == "Adam")
+        {
+            DropDownListOtimizacao.ToolTip = "Adam";
+            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
+        }
+        else if (DropDownListOtimizacao.SelectedValue == "Adamax")
+        {
+            DropDownListOtimizacao.ToolTip = "Adamax";
+            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
+        }
+        else if (DropDownListOtimizacao.SelectedValue == "AMSGrad")
+        {
+            DropDownListOtimizacao.ToolTip = "AMSGrad";
+            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
+        }
+    }
+
+    //Forma de ajuste
+    protected void DropDownListAjuste_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownListAjuste.SelectedValue == "Online")
+        {
+            DropDownListAjuste.ToolTip = "Online";
+        }
+        else if (DropDownListAjuste.SelectedValue == "Batch")
+        {
+            DropDownListAjuste.ToolTip = "Batch";
+            LabelMensagem.Text = "[Forma de ajuste não implementada]";
+        }
+        else if (DropDownListAjuste.SelectedValue == "Minibatch")
+        {
+            DropDownListAjuste.ToolTip = "Minibatch";
+            LabelMensagem.Text = "[Forma de ajuste não implementada]";
+        }
+    }
+
+    //Dimensão da rede
+    protected void DropDownListDimensao_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownListDimensao.SelectedValue == "SNN")
+        {
+            DropDownListDimensao.ToolTip = "Simple Neural Network";
+        }
+        else if (DropDownListDimensao.SelectedValue == "DNN")
+        {
+            DropDownListDimensao.ToolTip = "Deeplearn Neural Network";
+            LabelMensagem.Text = "[Dimensão não implementada]";
+        }
+    }
+
     //Limpar objetos de saída.
     protected void ButtonLimpar_Click(object sender, EventArgs e)
     {
         try
         {
+            ButtonNormalizar.Enabled = true;
+            ButtonDesnormalizar.Enabled = true;
+
             CheckBoxEMPA.Text = "EMPA:";
             LabelTempo.Text = "";
 
@@ -683,9 +886,9 @@ public partial class _Default : System.Web.UI.Page
             TextBoxSaida.Text = "1";
 
             LabelMensagem.Text = "";
-            LabelEntradasTit.Text = "Entradas (x)";
-            LabelSaidaTit.Text = "Saídas (y)";
-            LabelLinhas.Text = "0";
+            LabelEntradasLin.Text = "Entradas (x)";
+            LabelSaidasLin.Text = "Saídas (y)";
+            LabelEntradasLinhas.Text = "0";
 
             System_out_println.Clear();
 
@@ -725,11 +928,12 @@ public partial class _Default : System.Web.UI.Page
                     PrimeiraLinha = false;
                 }
             }
-            LabelLinhas.Text = nLin.ToString();
-            LabelEntradasTit.Text = "Entradas (x) Qtde Lin " + nLin.ToString() + " Col " + (nCol + 1).ToString();
-            TextBoxEntrada.Text = (nCol + 1).ToString();
+            
+            LabelEntradasLinhas.Text = nLin.ToString();
+            LabelEntradasColunas.Text = (nCol + 1).ToString();
 
-            TextBoxExemplos.Text = LabelLinhas.Text;
+            TextBoxExemplos.Text = LabelEntradasLinhas.Text;
+            TextBoxEntrada.Text = LabelEntradasColunas.Text;
 
             PrimeiraLinha = true;
             nLin = 0;
@@ -750,10 +954,14 @@ public partial class _Default : System.Web.UI.Page
                     PrimeiraLinha = false;
                 }
             }
-            LabelLinhas.Text = nLin.ToString();
-            LabelSaidaTit.Text = "Saídas (y) Qtde Lin " + nLin.ToString() + " Col " + (nCol + 1).ToString();
-            TextBoxSaida.Text = (nCol + 1).ToString();
 
+            LabelSaidasLinhas.Text = nLin.ToString();
+            LabelSaidasColunas.Text = (nCol + 1).ToString();
+
+            TextBoxSaida.Text = LabelSaidasColunas.Text;
+
+            MinMax();
+        
         }
         catch
         {
@@ -825,7 +1033,7 @@ public partial class _Default : System.Web.UI.Page
             saidas = saidasIniciais;
 
             //Número de linhas lidas
-            int nLinhas = Convert.ToInt32(LabelLinhas.Text);
+            int nLinhas = Convert.ToInt32(LabelEntradasLinhas.Text);
 
             //Índice da matriz
             int nIndice = Convert.ToInt32(TextBoxLimite.Text.ToString());
@@ -1052,6 +1260,359 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
+    //Normaliza os dados dos campos de entrada e saída
+    protected void ButtonNormalizar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (TextBoxEntradasMin.Text.Trim() == "")
+            {
+                MinMax();
+            }
+
+            ButtonNormalizar.Enabled = false;
+            ButtonDesnormalizar.Enabled = true;
+            nDecimais = Convert.ToInt32(TextBoxDecimais.Text);
+
+            String sAux = "";
+
+            //Entradas
+            if (TextBoxLerEntradas.Text.Trim() != "")
+            {
+                StringBuilder sbLinhas = new StringBuilder(); 
+                ArrayList alEntradasMin = StringToArray(TextBoxEntradasMin.Text, ";", 1);
+                ArrayList alEntradasMax = StringToArray(TextBoxEntradasMax.Text, ";", 1);
+                ArrayList alLinhasEntradas = StringToArray(TextBoxLerEntradas.Text, "\n", 1);
+                for (int nLin = 0; nLin <= alLinhasEntradas.Count - 1; nLin++)
+                {
+                    sAux = "";
+                    if (alLinhasEntradas[nLin].ToString().Trim() != "")
+                    {
+                        ArrayList alColunasEntradas = StringToArray(alLinhasEntradas[nLin].ToString().Trim(), ";", 1);
+                        for (int nCol = 0; nCol <= alColunasEntradas.Count - 1; nCol++)
+                        {
+                            if (alColunasEntradas[nCol].ToString().Trim() != "")
+                            {
+                                double nMin = 0;
+                                double nMax = 0;
+                                double nValor = 0;
+                                double nValorNormalizado = 0;
+                                if (DropDownListSeparador.SelectedValue == "Ponto")
+                                {
+                                    nMin = Convert.ToDouble(alEntradasMin[nCol].ToString().Trim().Replace(",", "."));
+                                    nMax = Convert.ToDouble(alEntradasMax[nCol].ToString().Trim().Replace(",", "."));
+                                    nValor = Convert.ToDouble(alColunasEntradas[nCol].ToString().Trim().Replace(",", "."));
+                                    nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                }
+                                else
+                                {
+                                    nMin = Convert.ToDouble(alEntradasMin[nCol].ToString().Trim().Replace(".", ","));
+                                    nMax = Convert.ToDouble(alEntradasMax[nCol].ToString().Trim().Replace(".", ","));
+                                    nValor = Convert.ToDouble(alColunasEntradas[nCol].ToString().Trim().Replace(".", ","));
+                                    nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                }
+                                sAux = sAux + nValorNormalizado.ToString() + ";";
+                            }
+                        }
+                        sAux = sAux.Substring(0, sAux.Length - 1) + "\n";
+                    }
+                    sbLinhas.Append(sAux);
+                }
+                TextBoxLerEntradas.Text = sbLinhas.ToString();
+            }
+
+            //Saídas
+            if (TextBoxLerSaidas.Text.Trim() != "")
+            {
+                StringBuilder sbLinhas = new StringBuilder();
+                ArrayList alSaidasMin = StringToArray(TextBoxSaidaMin.Text, ";", 1);
+                ArrayList alSaidasMax = StringToArray(TextBoxSaidaMax.Text, ";", 1);
+                ArrayList alLinhasSaidas = StringToArray(TextBoxLerSaidas.Text, "\n", 1);
+                for (int nLin = 0; nLin <= alLinhasSaidas.Count - 1; nLin++)
+                {
+                    sAux = "";
+                    if (alLinhasSaidas[nLin].ToString().Trim() != "")
+                    {
+                        ArrayList alColunasSaidas = StringToArray(alLinhasSaidas[nLin].ToString().Trim(), ";", 1);
+                        for (int nCol = 0; nCol <= alColunasSaidas.Count - 1; nCol++)
+                        {
+                            if (alColunasSaidas[nCol].ToString().Trim() != "")
+                            {
+                                double nMin = 0;
+                                double nMax = 0;
+                                double nValor = 0;
+                                double nValorNormalizado = 0;
+                                if (DropDownListSeparador.SelectedValue == "Ponto")
+                                {
+                                    nMin = Convert.ToDouble(alSaidasMin[nCol].ToString().Trim().Replace(",", "."));
+                                    nMax = Convert.ToDouble(alSaidasMax[nCol].ToString().Trim().Replace(",", "."));
+                                    nValor = Convert.ToDouble(alColunasSaidas[nCol].ToString().Trim().Replace(",", "."));
+                                    nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                }
+                                else
+                                {
+                                    nMin = Convert.ToDouble(alSaidasMin[nCol].ToString().Trim().Replace(".", ","));
+                                    nMax = Convert.ToDouble(alSaidasMax[nCol].ToString().Trim().Replace(".", ","));
+                                    nValor = Convert.ToDouble(alColunasSaidas[nCol].ToString().Trim().Replace(".", ","));
+                                    nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                }
+                                sAux = sAux + nValorNormalizado.ToString() + ";";
+                            }
+                        }
+                        sAux = sAux.Substring(0, sAux.Length - 1) + "\n";
+                    }
+                    sbLinhas.Append(sAux);
+                }
+                TextBoxLerSaidas.Text = sbLinhas.ToString();
+            }
+
+        }
+        catch
+        {
+        }
+    }
+
+    //Desnormaliza os dados dos campos de entrada e saída
+    protected void ButtonDesnormalizar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (TextBoxEntradasMin.Text.Trim() == "")
+            {
+                MinMax();
+            }
+
+            ButtonNormalizar.Enabled = true;
+            ButtonDesnormalizar.Enabled = false;
+            nDecimais = Convert.ToInt32(TextBoxDecimais.Text);
+
+            String sAux = "";
+
+            //Entradas
+            if (TextBoxLerEntradas.Text.Trim() != "")
+            {
+                StringBuilder sbLinhas = new StringBuilder();
+                ArrayList alEntradasMin = StringToArray(TextBoxEntradasMin.Text, ";", 1);
+                ArrayList alEntradasMax = StringToArray(TextBoxEntradasMax.Text, ";", 1);
+                ArrayList alLinhasEntradas = StringToArray(TextBoxLerEntradas.Text, "\n", 1);
+                for (int nLin = 0; nLin <= alLinhasEntradas.Count - 1; nLin++)
+                {
+                    sAux = "";
+                    if (alLinhasEntradas[nLin].ToString().Trim() != "")
+                    {
+                        ArrayList alColunasEntradas = StringToArray(alLinhasEntradas[nLin].ToString().Trim(), ";", 1);
+                        for (int nCol = 0; nCol <= alColunasEntradas.Count - 1; nCol++)
+                        {
+                            if (alColunasEntradas[nCol].ToString().Trim() != "")
+                            {
+                                double nMin = 0;
+                                double nMax = 0;
+                                double nValor = 0;
+                                double nValorDesnormalizado = 0;
+                                if (DropDownListSeparador.SelectedValue == "Ponto")
+                                {
+                                    nMin = Convert.ToDouble(alEntradasMin[nCol].ToString().Trim().Replace(",", "."));
+                                    nMax = Convert.ToDouble(alEntradasMax[nCol].ToString().Trim().Replace(",", "."));
+                                    nValor = Convert.ToDouble(alColunasEntradas[nCol].ToString().Trim().Replace(",", "."));
+                                    nValorDesnormalizado = Math.Round((nValor * nMax), 0);
+                                }
+                                else
+                                {
+                                    nMin = Convert.ToDouble(alEntradasMin[nCol].ToString().Trim().Replace(".", ","));
+                                    nMax = Convert.ToDouble(alEntradasMax[nCol].ToString().Trim().Replace(".", ","));
+                                    nValor = Convert.ToDouble(alColunasEntradas[nCol].ToString().Trim().Replace(".", ","));
+                                    nValorDesnormalizado = Math.Round((nValor * nMax), 0);
+                                }
+                                sAux = sAux + nValorDesnormalizado.ToString() + ";";
+                            }
+                        }
+                        sAux = sAux.Substring(0, sAux.Length - 1) + "\n";
+                    }
+                    sbLinhas.Append(sAux);
+                }
+                TextBoxLerEntradas.Text = sbLinhas.ToString();
+            }
+
+            //Saídas
+            if (TextBoxLerSaidas.Text.Trim() != "")
+            {
+                StringBuilder sbLinhas = new StringBuilder();
+                ArrayList alSaidasMin = StringToArray(TextBoxSaidaMin.Text, ";", 1);
+                ArrayList alSaidasMax = StringToArray(TextBoxSaidaMax.Text, ";", 1);
+                ArrayList alLinhasSaidas = StringToArray(TextBoxLerSaidas.Text, "\n", 1);
+                for (int nLin = 0; nLin <= alLinhasSaidas.Count - 1; nLin++)
+                {
+                    sAux = "";
+                    if (alLinhasSaidas[nLin].ToString().Trim() != "")
+                    {
+                        ArrayList alColunasSaidas = StringToArray(alLinhasSaidas[nLin].ToString().Trim(), ";", 1);
+                        for (int nCol = 0; nCol <= alColunasSaidas.Count - 1; nCol++)
+                        {
+                            if (alColunasSaidas[nCol].ToString().Trim() != "")
+                            {
+                                double nMin = 0;
+                                double nMax = 0;
+                                double nValor = 0;
+                                double nValorDesnormalizado = (nValor * nMax);
+                                if (DropDownListSeparador.SelectedValue == "Ponto")
+                                {
+                                    nMin = Convert.ToDouble(alSaidasMin[nCol].ToString().Trim().Replace(",", "."));
+                                    nMax = Convert.ToDouble(alSaidasMax[nCol].ToString().Trim().Replace(",", "."));
+                                    nValor = Convert.ToDouble(alColunasSaidas[nCol].ToString().Trim().Replace(",", "."));
+                                    nValorDesnormalizado = Math.Round((nValor * nMax), 0);
+                                }
+                                else
+                                {
+                                    nMin = Convert.ToDouble(alSaidasMin[nCol].ToString().Trim().Replace(".", ","));
+                                    nMax = Convert.ToDouble(alSaidasMax[nCol].ToString().Trim().Replace(".", ","));
+                                    nValor = Convert.ToDouble(alColunasSaidas[nCol].ToString().Trim().Replace(".", ","));
+                                    nValorDesnormalizado = Math.Round((nValor * nMax), 0);
+                                }
+                                sAux = sAux + nValorDesnormalizado.ToString() + ";";
+                            }
+                        }
+                        sAux = sAux.Substring(0, sAux.Length - 1) + "\n";
+                    }
+                    sbLinhas.Append(sAux);
+                }
+                TextBoxLerSaidas.Text = sbLinhas.ToString();
+            }
+
+        }
+        catch
+        {
+        }
+    }
+
+    //Retorna o valor mínimo de coluna do campo especificado
+    private double Minimo(String sTextBox, int nColuna)
+    {
+        double nRetorno = 0;
+        try
+        {
+            if (sTextBox.Trim() != "")
+            {
+                ArrayList alAux = new ArrayList();
+                ArrayList alLinhas = StringToArray(sTextBox, "\n", 1);
+                for (int nLin = 0; nLin <= alLinhas.Count - 1; nLin++)
+                {
+                    if (alLinhas[nLin].ToString().Trim() != "")
+                    {
+                        ArrayList alColunas = StringToArray(alLinhas[nLin].ToString().Trim(), ";", 1);
+                        for (int nCol = 0; nCol <= alColunas.Count - 1; nCol++)
+                        {
+                            if (nCol == nColuna)
+                            {
+                                alAux.Add(alColunas[nCol].ToString());
+                            }
+                        }
+                    }
+                }
+                alAux.Sort();
+                if (DropDownListSeparador.SelectedValue == "Ponto")
+                {
+                    nRetorno = Convert.ToDouble(alAux[0].ToString().Replace(",", "."));
+                }
+                else
+                {
+                    nRetorno = Convert.ToDouble(alAux[0].ToString().Replace(".", ","));
+                }
+            }
+        }
+        catch
+        {
+        }
+        return (nRetorno);
+    }
+
+    //Retorna o valor máximo de coluna do campo especificado
+    private double Maximo(String sTextBox, int nColuna)
+    {
+        double nRetorno = 0;
+        try
+        {
+            if (sTextBox.Trim() != "")
+            {
+                ArrayList alAux = new ArrayList();
+                ArrayList alLinhas = StringToArray(sTextBox, "\n", 1);
+                for (int nLin = 0; nLin <= alLinhas.Count - 1; nLin++)
+                {
+                    if (alLinhas[nLin].ToString().Trim() != "")
+                    {
+                        ArrayList alColunas = StringToArray(alLinhas[nLin].ToString().Trim(), ";", 1);
+                        for (int nCol = 0; nCol <= alColunas.Count - 1; nCol++)
+                        {
+                            if (nCol == nColuna)
+                            {
+                                alAux.Add(alColunas[nCol].ToString());
+                            }
+                        }
+                    }
+                }
+                alAux.Sort();
+                if (DropDownListSeparador.SelectedValue == "Ponto")
+                {
+                    nRetorno = Convert.ToDouble(alAux[alAux.Count - 1].ToString().Replace(",", "."));
+                }
+                else
+                {
+                    nRetorno = Convert.ToDouble(alAux[alAux.Count - 1].ToString().Replace(".", ","));
+                }
+            }
+        }
+        catch
+        {
+        }
+        return (nRetorno);
+    }
+
+    //Obtém os valores mínimos e máximos de cada coluna dos campos de entrada e saída
+    private void MinMax()
+    {
+        try
+        {
+            if (LabelEntradasColunas.Text.Trim() == "0")
+            {
+                ButtonLer_Click(null, null);
+            }
+
+            String sE = "";
+            for (int c = 0; c <= Convert.ToInt32(LabelEntradasColunas.Text) - 1; c++)
+            {
+                sE = sE + Minimo(TextBoxLerEntradas.Text, c) + ";";
+            }
+            sE = sE.Substring(0, sE.Length - 1);
+            TextBoxEntradasMin.Text = sE;
+
+            sE = "";
+            for (int c = 0; c <= Convert.ToInt32(LabelEntradasColunas.Text) - 1; c++)
+            {
+                sE = sE + Maximo(TextBoxLerEntradas.Text, c) + ";";
+            }
+            sE = sE.Substring(0, sE.Length - 1);
+            TextBoxEntradasMax.Text = sE;
+
+            String sS = "";
+            for (int c = 0; c <= Convert.ToInt32(LabelSaidasColunas.Text) - 1; c++)
+            {
+                sS = sS + Minimo(TextBoxLerSaidas.Text, c) + ";";
+            }
+            sS = sS.Substring(0, sS.Length - 1);
+            TextBoxSaidaMin.Text = sS;
+
+            sS = "";
+            for (int c = 0; c <= Convert.ToInt32(LabelSaidasColunas.Text) - 1; c++)
+            {
+                sS = sS + Maximo(TextBoxLerSaidas.Text, c) + ";";
+            }
+            sS = sS.Substring(0, sS.Length - 1);
+            TextBoxSaidaMax.Text = sS;
+        }
+        catch
+        {
+        }
+    }
+
     //Pesquisa substring em string por intervalo de palavras chaves.
     private string PesquisarTXT(String pTexto, String pChave, string pFinal)
     {
@@ -1172,7 +1733,7 @@ public partial class _Default : System.Web.UI.Page
     }
 
     //Transforma string em array.
-    public static ArrayList StringToArray(string pString, string pCaracterQuebra, int pRetorno)
+    private static ArrayList StringToArray(string pString, string pCaracterQuebra, int pRetorno)
     {
         int nRetorno = 0;
         int nInicio = 0;
@@ -1203,189 +1764,30 @@ public partial class _Default : System.Web.UI.Page
         return (alTmp);
     }
 
-    //Função de ativação
-    protected void DropDownListAtivacao_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (DropDownListAtivacao.SelectedValue == "Linear")
-        {
-            DropDownListAtivacao.ToolTip = "f(x)=x | f'(x)=x";
-            LabelMensagem.Text = "[Função de ativação não implementada]";
-        }
-        else if (DropDownListAtivacao.SelectedValue == "Degrau")
-        {
-            DropDownListAtivacao.ToolTip = "f(x)=1; se x>=0->0:1 | f'(x)=?; se x=0->0";
-            LabelMensagem.Text = "[Função de ativação não implementada]";
-        }
-        else if (DropDownListAtivacao.SelectedValue == "Sigmóide")
-        {
-            DropDownListAtivacao.ToolTip = "f(x)=1/(1+e^(-x)) | f'(x)=f(x)(1-f(x))";
-            LabelMensagem.Text = "";
-        }
-        else if (DropDownListAtivacao.SelectedValue == "Hiperbólica")
-        {
-            DropDownListAtivacao.ToolTip = "f(x)=(e^x-e^-x)/(e^x+e^-x) | f'(x)=1-f(x)^2";
-            LabelMensagem.Text = "[Função de ativação não implementada]";
-        }
-        else if (DropDownListAtivacao.SelectedValue == "ReLu")
-        {
-            DropDownListAtivacao.ToolTip = "f(x)=x se x>=0->0 | f'(x)=1; se x>=0->0";
-            LabelMensagem.Text = "[Função de ativação não implementada]";
-        }
-        else if (DropDownListAtivacao.SelectedValue == "Leaky ReLu")
-        {
-            DropDownListAtivacao.ToolTip = "f(x)=x; se x>=0->0,01x | f'(x)=1; se x>=0->0,01";
-            LabelMensagem.Text = "[Função de ativação não implementada]";
-        }
-        else if (DropDownListAtivacao.SelectedValue == "Soft Max")
-        {
-            DropDownListAtivacao.ToolTip = "f(x)=(e^xi)/(ΣKj=1e^xj)";
-            LabelMensagem.Text = "[Função de ativação não implementada]";
-        }
-    }
 
-    //Função custo
-    protected void DropDownListFuncaoCusto_SelectedIndexChanged(object sender, EventArgs e)
+    //Calculo do Erro Médio Percentual Absoluto
+    private static double CalculaEMPA(string pReal, string pPrevisto)
     {
-        if (DropDownListFuncaoCusto.SelectedValue == "EC")
+        double nRetorno = 0;
+        try
         {
-            DropDownListFuncaoCusto.ToolTip = "Entropia Cruzada: função custo para classificação";
-            LabelMensagem.Text = "[Função custo não implementada]";
-            CheckBoxCusto.Text = "EC";
-        }
-        else if (DropDownListFuncaoCusto.SelectedValue == "L1")
-        {
-            DropDownListFuncaoCusto.ToolTip = "Erro Médio Absoluto (EMA): função custo para predição";
-            LabelMensagem.Text = "[Função custo não implementada]";
-            CheckBoxCusto.Text = "EMA";
-        }
-        else if (DropDownListFuncaoCusto.SelectedValue == "L2")
-        {
-            DropDownListFuncaoCusto.ToolTip = "Erro Médio Quadrático (EMQ): função custo para predição";
-            LabelMensagem.Text = "";
-            CheckBoxCusto.Text = "EMQ";
-        }
-    }
 
-    //Avaliação de desempenho
-    protected void DropDownListDesempenho_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (DropDownListDesempenho.SelectedValue == "MSE")
-        {
-            DropDownListDesempenho.ToolTip = "MSE";
-            LabelMensagem.Text = "[Avaliação de desempenho não implementada]";
+            //def calculaerro(Real, Previsto):
+            //erroabsoluto = 0
+            //n = Real.size
+            //nLinhas = len(Real)
+            //nColunas = len(Real[0])
+            //for i in range(nLinhas):
+            //for j in range(nColunas):
+            //e = abs(Real[i][j] - Previsto[i][j]) / abs(Real[i][j])
+            //erroabsoluto += e
+            //erromedioabsoluto = erroabsoluto * 100 / n
+            //return erromedioabsoluto
         }
-        else if (DropDownListDesempenho.SelectedValue == "MAE")
+        catch
         {
-            DropDownListDesempenho.ToolTip = "MAE";
-            LabelMensagem.Text = "[Avaliação de desempenho não implementada]";
         }
-        else if (DropDownListDesempenho.SelectedValue == "MAPE")
-        {
-            DropDownListDesempenho.ToolTip = "MAPE";
-            LabelMensagem.Text = "[Avaliação de desempenho não implementada]";
-        }
-        else if (DropDownListDesempenho.SelectedValue == "")
-        {
-            DropDownListDesempenho.ToolTip = "";
-            LabelMensagem.Text = "";
-        }
-    }
-
-    //Arquitetura da rede
-    protected void DropDownListArquitetura_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (DropDownListArquitetura.SelectedValue == "CNN")
-        {
-            DropDownListArquitetura.ToolTip = "Convolutional Neural Network";
-            LabelMensagem.Text = "[Arquitetura da rede não implementada]";
-        }
-        else if (DropDownListArquitetura.SelectedValue == "RNN")
-        {
-            DropDownListArquitetura.ToolTip = "Recurrent Neural Network";
-            LabelMensagem.Text = "[Arquitetura da rede não implementada]";
-        }
-        else if (DropDownListArquitetura.SelectedValue == "MLP")
-        {
-            DropDownListArquitetura.ToolTip = "Multilayer Perceptron";
-            LabelMensagem.Text = "";
-        }
-    }
-
-    //Algoritmo de otimização
-    protected void DropDownListOtimizacao_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (DropDownListOtimizacao.SelectedValue == "Momentum")
-        {
-            DropDownListOtimizacao.ToolTip = "Momentum";
-        }
-        else if (DropDownListOtimizacao.SelectedValue == "Adagrad")
-        {
-            DropDownListOtimizacao.ToolTip = "Adagrad";
-            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
-        }
-        else if (DropDownListOtimizacao.SelectedValue == "RMSprop")
-        {
-            DropDownListOtimizacao.ToolTip = "RMSProp";
-            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
-        }
-        else if (DropDownListOtimizacao.SelectedValue == "Adadelta")
-        {
-            DropDownListOtimizacao.ToolTip = "Adadelta";
-            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
-        }
-        else if (DropDownListOtimizacao.SelectedValue == "Nesterov")
-        {
-            DropDownListOtimizacao.ToolTip = "Nesterov";
-            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
-        }
-        else if (DropDownListOtimizacao.SelectedValue == "Adam")
-        {
-            DropDownListOtimizacao.ToolTip = "Adam";
-            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
-        }
-        else if (DropDownListOtimizacao.SelectedValue == "Adamax")
-        {
-            DropDownListOtimizacao.ToolTip = "Adamax";
-            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
-        }
-        else if (DropDownListOtimizacao.SelectedValue == "AMSGrad")
-        {
-            DropDownListOtimizacao.ToolTip = "AMSGrad";
-            LabelMensagem.Text = "[Algoritmo de otimização não implementado]";
-        }
-    }
-
-    //Forma de ajuste
-    protected void DropDownListAjuste_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (DropDownListAjuste.SelectedValue == "Online")
-        {
-            DropDownListAjuste.ToolTip = "Online";
-        }
-        else if (DropDownListAjuste.SelectedValue == "Batch")
-        {
-            DropDownListAjuste.ToolTip = "Batch";
-            LabelMensagem.Text = "[Forma de ajuste não implementada]";
-        }
-        else if (DropDownListAjuste.SelectedValue == "Minibatch")
-        {
-            DropDownListAjuste.ToolTip = "Minibatch";
-            LabelMensagem.Text = "[Forma de ajuste não implementada]";
-        }
-    }
-
-    //Dimensão da rede
-    protected void DropDownListDimensao_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (DropDownListDimensao.SelectedValue == "SNN")
-        {
-            DropDownListDimensao.ToolTip = "Simple Neural Network";
-        }
-        else if (DropDownListDimensao.SelectedValue == "DNN")
-        {
-            DropDownListDimensao.ToolTip = "Deeplearn Neural Network";
-            LabelMensagem.Text = "[Dimensão não implementada]";
-        }
+        return (nRetorno);
     }
 
 }

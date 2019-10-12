@@ -42,8 +42,8 @@
                     <asp:RequiredFieldValidator ID="rfvEscondida" runat="server" ControlToValidate="TextBoxEscondida"
                         Display="Dynamic" ErrorMessage="*" Font-Bold="True" ForeColor="Red" SetFocusOnError="True"></asp:RequiredFieldValidator>
                     <asp:RangeValidator ID="rvEscondida" runat="server" ControlToValidate="TextBoxEscondida"
-                        Display="Dynamic" ErrorMessage="1..10" Font-Bold="True" ForeColor="Red" MinimumValue="1"
-                        MaximumValue="10" SetFocusOnError="True" Type="Integer"></asp:RangeValidator>
+                        Display="Dynamic" ErrorMessage="1..100" Font-Bold="True" ForeColor="Red" MinimumValue="1"
+                        MaximumValue="100" SetFocusOnError="True" Type="Integer"></asp:RangeValidator>
                 </td>
                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #000000;
                     vertical-align: top; text-align: left;" width="5%">
@@ -191,7 +191,7 @@
                     <asp:Label ID="LabelMomento" runat="server" Font-Bold="True" Text="Momento"></asp:Label>
                     <br />
                     <asp:TextBox ID="TextBoxMomento" runat="server" Width="40px" 
-                        ToolTip="Taxa de momento (beta)" Font-Names="Courier New">0.1</asp:TextBox>
+                        ToolTip="Taxa de momento (beta)" Font-Names="Courier New">0.9</asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvMomento" runat="server" ControlToValidate="TextBoxMomento"
                         Display="Dynamic" ErrorMessage="*" Font-Bold="True" ForeColor="Red" SetFocusOnError="True"></asp:RequiredFieldValidator>
                 </td>
@@ -231,24 +231,22 @@
             <tr>
                 <td style="vertical-align: top; text-align: left; border-top-style: solid; border-top-width: 1px;
                     border-top-color: #000000;" width="100%">
-                    <asp:Button ID="ButtonLimpar" runat="server" Text="Limpar" Font-Bold="True" OnClick="ButtonLimpar_Click"
-                        Width="60px" ToolTip="Reinicializa dados para um novo treinamento" />
-                    <asp:Button ID="ButtonLer" runat="server" Text="Ler" Font-Bold="True" OnClick="ButtonLer_Click"
-                        Width="60px" 
-                        ToolTip="Lê dados de entrada/saída para preenchimento das matrizes" 
-                        Visible="False" />
-                    <asp:Button ID="ButtonTreinar" runat="server" Text="Treinar" Font-Bold="True" OnClick="ButtonTreinar_Click"
-                        Width="60px" ToolTip="Inicia o treinamento da Rede Neural Artificial (RNA) modelo MLP" />
+                    <asp:Button ID="ButtonLimpar" runat="server" Text="Limpar" Font-Bold="True" 
+                        OnClick="ButtonLimpar_Click" 
+                        ToolTip="Reinicializa dados para um novo treinamento" />
+                    <asp:Button ID="ButtonLer" runat="server" Text="Ler" Font-Bold="True" OnClick="ButtonLer_Click" 
+                        ToolTip="Lê dados de entrada/saída para preenchimento das matrizes" />
+                    <asp:Button ID="ButtonTreinar" runat="server" Text="Treinar" Font-Bold="True" 
+                        OnClick="ButtonTreinar_Click" 
+                        ToolTip="Inicia o treinamento da Rede Neural Artificial (RNA) modelo MLP" />
                     <asp:DropDownList ID="DropDownListSeparador" runat="server" AutoPostBack="True" 
                         onselectedindexchanged="DropDownListAtivacao_SelectedIndexChanged" 
                         ToolTip="Separador de decimais" Font-Names="Courier New">
                         <asp:ListItem Selected="True">Ponto</asp:ListItem>
                         <asp:ListItem>Vírgula</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:Label ID="LabelLimite" runat="server" Font-Bold="True" Text="Limite" 
-                        ForeColor="Red" Visible="False"></asp:Label>
-                    <asp:TextBox ID="TextBoxLimite" runat="server" Width="50px" ToolTip="Limite máximo de linhas da matriz (força saída do treinamento)"
-                        Font-Bold="True" ForeColor="Red" Visible="False" Enabled="False">100</asp:TextBox>
+                    <asp:TextBox ID="TextBoxLimite" runat="server" Width="30px" ToolTip="Limite máximo de linhas da matriz (força saída do treinamento)"
+                        Font-Bold="True" ForeColor="Red" Enabled="False" BackColor="Silver">100</asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvQuebra" runat="server" ControlToValidate="TextBoxLimite"
                         Display="Dynamic" ErrorMessage="*" Font-Bold="True" ForeColor="Red" SetFocusOnError="True"></asp:RequiredFieldValidator>
                     <asp:RangeValidator ID="rvQuebra" runat="server" ControlToValidate="TextBoxLimite"
@@ -257,8 +255,20 @@
                         MaximumValue="100000" SetFocusOnError="True" Type="Integer"></asp:RangeValidator>
                     <asp:Label ID="LabelLinhasTit" runat="server" Font-Bold="True" 
                         Text="Qtd.Linhas" ForeColor="Red" Visible="False"></asp:Label>
-                    <asp:Label ID="LabelLinhas" runat="server" Font-Bold="True" Text="0" ToolTip="Número de linhas"
-                        ForeColor="Red" Visible="False"></asp:Label>
+                    <asp:DropDownList ID="DropDownListNormalizacao" runat="server" AutoPostBack="True" 
+                        onselectedindexchanged="DropDownListNormalizacao_SelectedIndexChanged" 
+                        ToolTip="Tipos de normalização" Font-Names="Courier New">
+                        <asp:ListItem Selected="True">Simples</asp:ListItem>
+                        <asp:ListItem>Linear</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:Button ID="ButtonNormalizar" runat="server" Text="Normalizar" 
+                        Font-Bold="True" OnClick="ButtonNormalizar_Click" 
+                        ToolTip="Normaliza os dados dos campos de entrada e saída" 
+                        style="height: 26px" />
+                    <asp:Button ID="ButtonDesnormalizar" runat="server" Text="Desnormalizar" 
+                        Font-Bold="True" OnClick="ButtonDesnormalizar_Click" 
+                        ToolTip="Desnormaliza os dados dos campos de entrada e saída" 
+                        Enabled="False" />
                     <asp:CheckBox ID="CheckBoxEMPA" runat="server" Checked="True" Font-Bold="True" 
                         ForeColor="Red" Text="EMPA:" ToolTip="Erro Médio Percentual Absoluto" />
                     <asp:Label ID="LabelTempo" runat="server" Font-Bold="True" 
@@ -317,23 +327,66 @@
         <table style="width: 100%;">
             <tr>
                 <td style="vertical-align: top; text-align: left;" width="50%">
-                    <asp:Label ID="LabelEntradasTit" runat="server" Font-Bold="True" Text="Entradas (x)"></asp:Label>
+                    <asp:Label ID="LabelEntradasLin" runat="server" Font-Bold="True" 
+                        Text="Entradas (x) Qtde Lin"></asp:Label>
+                    <asp:Label ID="LabelEntradasLinhas" runat="server" Font-Bold="True" Text="0" ToolTip="Número de linhas de entrada"
+                        ForeColor="Red"></asp:Label>
+                    <asp:Label ID="LabelEntradasCol" runat="server" Font-Bold="True" 
+                        Text="Qtde Col"></asp:Label>
+                    <asp:Label ID="LabelEntradasColunas" runat="server" Font-Bold="True" Text="0" ToolTip="Número de colunas de entrada"
+                        ForeColor="Red"></asp:Label>
                 </td>
                 <td style="vertical-align: top; text-align: left;" width="50%">
-                    <asp:Label ID="LabelSaidaTit" runat="server" Font-Bold="True" Text="Saídas (y)"></asp:Label>
+                    <asp:Label ID="LabelSaidasLin" runat="server" Font-Bold="True" 
+                        Text="Saídas (y) Qtde Lin"></asp:Label>
+                    <asp:Label ID="LabelSaidasLinhas" runat="server" Font-Bold="True" Text="0" ToolTip="Número de linhas de saída"
+                        ForeColor="Red"></asp:Label>
+                    <asp:Label ID="LabelSaidasCol" runat="server" Font-Bold="True" Text="Qtde Col"></asp:Label>
+                    <asp:Label ID="LabelSaidasColunas" runat="server" Font-Bold="True" Text="0" ToolTip="Número de colunas de saída"
+                        ForeColor="Red"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td style="vertical-align: top; text-align: left;" width="50%">
-                    <asp:TextBox ID="TextBoxLerEntradas" runat="server" Rows="10" TextMode="MultiLine"
+                    <asp:TextBox ID="TextBoxEntradasMin" runat="server" Rows="1" TextMode="MultiLine"
                         
-                        ToolTip="Insira ou cole aqui os dados de entrada separados por ponto-e-vírgula" Width="100%" 
+                        ToolTip="Menores valores de cada coluna de entrada (não normalizado)" Width="100%" 
+                        Font-Names="Courier New" BackColor="Silver"></asp:TextBox>
+                </td>
+                <td style="vertical-align: top; text-align: left;" width="50%">
+                    <asp:TextBox ID="TextBoxSaidaMin" runat="server" Rows="1" TextMode="MultiLine"
+                        
+                        ToolTip="Menores valores de cada coluna de saída (não normalizado)" Width="100%" 
+                        Font-Names="Courier New" BackColor="Silver"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top; text-align: left;" width="50%">
+                    <asp:TextBox ID="TextBoxEntradasMax" runat="server" Rows="1" TextMode="MultiLine"
+                        
+                        ToolTip="Maiores valores de cada coluna de entrada (não normalizado)" Width="100%" 
+                        Font-Names="Courier New" BackColor="Silver"></asp:TextBox>
+                </td>
+                <td style="vertical-align: top; text-align: left;" width="50%">
+                    <asp:TextBox ID="TextBoxSaidaMax" runat="server" Rows="1" TextMode="MultiLine"
+                        
+                        ToolTip="Maiores valores de cada coluna de saída (não normalizado)" Width="100%" 
+                        Font-Names="Courier New" BackColor="Silver"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top; text-align: left;" width="50%">
+                    <asp:TextBox ID="TextBoxLerEntradas" runat="server" Rows="5" TextMode="MultiLine"
+                        
+                        
+                        ToolTip="Insira ou cole aqui os dados de entrada separados por ponto-e-vírgula (não normalizados)" Width="100%" 
                         Font-Names="Courier New"></asp:TextBox>
                 </td>
                 <td style="vertical-align: top; text-align: left;" width="50%">
-                    <asp:TextBox ID="TextBoxLerSaidas" runat="server" Rows="10" TextMode="MultiLine"
+                    <asp:TextBox ID="TextBoxLerSaidas" runat="server" Rows="5" TextMode="MultiLine"
                         
-                        ToolTip="Insira ou cole aqui os dados de saída separados por ponto-e-vírgula" Width="100%" 
+                        
+                        ToolTip="Insira ou cole aqui os dados de saída separados por ponto-e-vírgula (não normalizados)" Width="100%" 
                         Font-Names="Courier New"></asp:TextBox>
                 </td>
             </tr>
@@ -341,11 +394,15 @@
         <table style="width: 100%;">
             <tr>
                 <td style="vertical-align: top; text-align: left;" width="100%">
-                    <asp:Label ID="LabelAutoria" runat="server" Font-Bold="False" Text="alvarofpinheiro (09/10/2019)"
-                        ToolTip="Autoria"></asp:Label>
-                    <asp:HyperLink ID="hub" runat="server" 
+                    <asp:Label ID="LabelAutoria" runat="server" Font-Bold="False" Text="alvarofpinheiro (12/10/2019)"
+                        
+                        ToolTip="Atualizações:09/10/2019-Publicada a primeira versão|12/10/2019-Implementada a normalização;Corrigido o EMPA|"></asp:Label>
+                    <asp:HyperLink ID="HyperlinkGithub" runat="server" 
                         NavigateUrl="https://github.com/alvarofpinheiro/NeuralNetwork" Target="_blank" 
-                        ToolTip="fontes">https://github.com/alvarofpinheiro/NeuralNetwork</asp:HyperLink>
+                        ToolTip="Download do código fonte">https://github.com/alvarofpinheiro/NeuralNetwork</asp:HyperLink>
+                    <asp:HyperLink ID="HyperlinkExplicação" runat="server" 
+                        NavigateUrl="https://www.youtube.com/watch?v=VkZorzGDdrY" Target="_blank" 
+                        ToolTip="Explicação de como utilizar a aplicação">Explicação</asp:HyperLink>
                 </td>
             </tr>
         </table>
