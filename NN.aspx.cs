@@ -716,13 +716,11 @@ public partial class _Default : System.Web.UI.Page
     {
         if (DropDownListNormalizacao.SelectedValue == "Simples")
         {
-            DropDownListNormalizacao.ToolTip = "Simples: n/max(n) | n*max(n)";
-            LabelMensagem.Text = "[Função custo não implementada]";
+            DropDownListNormalizacao.ToolTip = "Simples: n/max | n*max";
         }
         else if (DropDownListNormalizacao.SelectedValue == "Linear")
         {
-            DropDownListNormalizacao.ToolTip = "Linear: (b-a)*(n-min(n))/(max(n)-min(n))+a | (n-a)*(max(n)-min(n))/(b-a)+min(n)";
-            LabelMensagem.Text = "[Função custo não implementada]";
+            DropDownListNormalizacao.ToolTip = "Linear: (b-a)*(n-min)/(max-min)+a | (n-a)*(max-min)/(b-a)+min";
         }
     }
 
@@ -1348,14 +1346,36 @@ public partial class _Default : System.Web.UI.Page
                                     nMin = Convert.ToDouble(alEntradasMin[nCol].ToString().Trim().Replace(",", "."));
                                     nMax = Convert.ToDouble(alEntradasMax[nCol].ToString().Trim().Replace(",", "."));
                                     nValor = Convert.ToDouble(alColunasEntradas[nCol].ToString().Trim().Replace(",", "."));
-                                    nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                    if (DropDownListNormalizacao.SelectedValue == "Simples")
+                                    {
+                                        //n/max
+                                        nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                    }
+                                    else if (DropDownListNormalizacao.SelectedValue == "Linear")
+                                    {
+                                        //(b-a)*(n-min)/(max-min)+a
+                                        double a = 0.1;
+                                        double b = 0.9;
+                                        nValorNormalizado = Math.Round((b - a) * (nValor - nMin) / (nMax - nMin) + a, nDecimais);
+                                    }
                                 }
                                 else
                                 {
                                     nMin = Convert.ToDouble(alEntradasMin[nCol].ToString().Trim().Replace(".", ","));
                                     nMax = Convert.ToDouble(alEntradasMax[nCol].ToString().Trim().Replace(".", ","));
                                     nValor = Convert.ToDouble(alColunasEntradas[nCol].ToString().Trim().Replace(".", ","));
-                                    nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                    if (DropDownListNormalizacao.SelectedValue == "Simples")
+                                    {
+                                        //n/max
+                                        nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                    }
+                                    else if (DropDownListNormalizacao.SelectedValue == "Linear")
+                                    {
+                                        //(b-a)*(n-min)/(max-min)+a
+                                        double a = 0.1;
+                                        double b = 0.9;
+                                        nValorNormalizado = Math.Round((b - a) * (nValor - nMin) / (nMax - nMin) + a, nDecimais);
+                                    }
                                 }
                                 sAux = sAux + nValorNormalizado.ToString() + ";";
                             }
@@ -1393,14 +1413,36 @@ public partial class _Default : System.Web.UI.Page
                                     nMin = Convert.ToDouble(alSaidasMin[nCol].ToString().Trim().Replace(",", "."));
                                     nMax = Convert.ToDouble(alSaidasMax[nCol].ToString().Trim().Replace(",", "."));
                                     nValor = Convert.ToDouble(alColunasSaidas[nCol].ToString().Trim().Replace(",", "."));
-                                    nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                    if (DropDownListNormalizacao.SelectedValue == "Simples")
+                                    {
+                                        //n/max
+                                        nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                    }
+                                    else if (DropDownListNormalizacao.SelectedValue == "Linear")
+                                    {
+                                        //(b-a)*(n-min)/(max-min)+a
+                                        double a = 0.1;
+                                        double b = 0.9;
+                                        nValorNormalizado = Math.Round((b - a) * (nValor - nMin) / (nMax - nMin) + a, nDecimais);
+                                    }
                                 }
                                 else
                                 {
                                     nMin = Convert.ToDouble(alSaidasMin[nCol].ToString().Trim().Replace(".", ","));
                                     nMax = Convert.ToDouble(alSaidasMax[nCol].ToString().Trim().Replace(".", ","));
                                     nValor = Convert.ToDouble(alColunasSaidas[nCol].ToString().Trim().Replace(".", ","));
-                                    nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                    if (DropDownListNormalizacao.SelectedValue == "Simples")
+                                    {
+                                        //n/max
+                                        nValorNormalizado = Math.Round((nValor / nMax), nDecimais);
+                                    }
+                                    else if (DropDownListNormalizacao.SelectedValue == "Linear")
+                                    {
+                                        //(b-a)*(n-min)/(max-min)+a
+                                        double a = 0.1;
+                                        double b = 0.9;
+                                        nValorNormalizado = Math.Round((b - a) * (nValor - nMin) / (nMax - nMin) + a, nDecimais);
+                                    }
                                 }
                                 sAux = sAux + nValorNormalizado.ToString() + ";";
                             }
@@ -1460,14 +1502,39 @@ public partial class _Default : System.Web.UI.Page
                                     nMin = Convert.ToDouble(alEntradasMin[nCol].ToString().Trim().Replace(",", "."));
                                     nMax = Convert.ToDouble(alEntradasMax[nCol].ToString().Trim().Replace(",", "."));
                                     nValor = Convert.ToDouble(alColunasEntradas[nCol].ToString().Trim().Replace(",", "."));
-                                    nValorDesnormalizado = Math.Round((nValor * nMax), 0);
+                                    
+                                    if (DropDownListNormalizacao.SelectedValue == "Simples")
+                                    {
+                                        //n/max
+                                        nValorDesnormalizado = Math.Round((nValor * nMax), 0);
+                                    }
+                                    else if (DropDownListNormalizacao.SelectedValue == "Linear")
+                                    {
+                                        //(n-a)*(max-min)/(b-a)+min
+                                        double a = 0.1;
+                                        double b = 0.9;
+                                        nValorDesnormalizado = Math.Round((nValor - a) * (nMax - nMin) / (b - a) + nMin, nDecimais);
+                                    }
                                 }
                                 else
                                 {
                                     nMin = Convert.ToDouble(alEntradasMin[nCol].ToString().Trim().Replace(".", ","));
                                     nMax = Convert.ToDouble(alEntradasMax[nCol].ToString().Trim().Replace(".", ","));
                                     nValor = Convert.ToDouble(alColunasEntradas[nCol].ToString().Trim().Replace(".", ","));
-                                    nValorDesnormalizado = Math.Round((nValor * nMax), 0);
+
+                                    if (DropDownListNormalizacao.SelectedValue == "Simples")
+                                    {
+                                        //n/max
+                                        nValorDesnormalizado = Math.Round((nValor * nMax), 0);
+                                    }
+                                    else if (DropDownListNormalizacao.SelectedValue == "Linear")
+                                    {
+                                        //(n-a)*(max-min)/(b-a)+min
+                                        double a = 0.1;
+                                        double b = 0.9;
+                                        nValorDesnormalizado = Math.Round((nValor - a) * (nMax - nMin) / (b - a) + nMin, nDecimais);
+                                    }
+
                                 }
                                 sAux = sAux + nValorDesnormalizado.ToString() + ";";
                             }

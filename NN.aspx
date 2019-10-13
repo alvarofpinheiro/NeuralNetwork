@@ -250,7 +250,7 @@
                         <asp:ListItem>Vírgula</asp:ListItem>
                     </asp:DropDownList>
                     <asp:TextBox ID="TextBoxLimite" runat="server" Width="30px" ToolTip="Limite máximo de linhas da matriz (força saída do treinamento)"
-                        Font-Bold="True" ForeColor="Red" Enabled="False" BackColor="Silver">100</asp:TextBox>
+                        Font-Bold="True" ForeColor="Red" Enabled="False" BackColor="Silver" Visible="False">100</asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvQuebra" runat="server" ControlToValidate="TextBoxLimite"
                         Display="Dynamic" ErrorMessage="*" Font-Bold="True" ForeColor="Red" SetFocusOnError="True"></asp:RequiredFieldValidator>
                     <asp:RangeValidator ID="rvQuebra" runat="server" ControlToValidate="TextBoxLimite"
