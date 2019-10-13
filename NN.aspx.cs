@@ -1156,6 +1156,8 @@ public partial class _Default : System.Web.UI.Page
             bool bNovoExemplo = false;
             String sCicloExemplo = "";
             String sExemplo = "";
+            String sAux = "";
+            double nAux = 0;
             for (int i = 0; i <= retorno.Count - 1; i++)
             {
                 try
@@ -1197,6 +1199,44 @@ public partial class _Default : System.Web.UI.Page
                                 TextBoxSaidaExemplos.Text = TextBoxSaidaExemplos.Text + sExemplo + "\n";
                             }
                             bNovoExemplo = true;
+                        }
+                    }
+
+                    //Obtém saída desejada.
+                    String sSaidaDesejada = retorno[i].ToString();
+                    if (sSaidaDesejada.IndexOf("Saída desejada") != -1)
+                    {
+                        if (CheckBoxDesejados.Checked)
+                        {
+                            sAux = sSaidaDesejada.Replace("Saída desejada: ", "").Replace(";", "");
+                            if (DropDownListSeparador.SelectedValue == "Ponto")
+                            {
+                                nAux = Math.Round(Convert.ToDouble(sAux.Trim().Replace(",", ".")), nDecimais);
+                            }
+                            else
+                            {
+                                nAux = Math.Round(Convert.ToDouble(sAux.Trim().Replace(".", ",")), nDecimais);
+                            }
+                            TextBoxSaidaDesejada.Text = TextBoxSaidaDesejada.Text + nAux.ToString() + "\n";
+                        }
+                    }
+
+                    //Obtém saída calculada.
+                    String sSaidaCalculada = retorno[i].ToString();
+                    if (sSaidaCalculada.IndexOf("Saída calculada") != -1)
+                    {
+                        if (CheckBoxCalculados.Checked)
+                        {
+                            sAux = sSaidaCalculada.Replace("Saída calculada: ", "").Replace(";", "");
+                            if (DropDownListSeparador.SelectedValue == "Ponto")
+                            {
+                                nAux = Math.Round(Convert.ToDouble(sAux.Trim().Replace(",", ".")), nDecimais);
+                            }
+                            else
+                            {
+                                nAux = Math.Round(Convert.ToDouble(sAux.Trim().Replace(".", ",")), nDecimais);
+                            }
+                            TextBoxSaidaCalculada.Text = TextBoxSaidaCalculada.Text + nAux.ToString() + "\n";
                         }
                     }
 
@@ -1248,7 +1288,13 @@ public partial class _Default : System.Web.UI.Page
             //imprime o EMPA.
             if (CheckBoxEMPA.Checked)
             {
-                CheckBoxEMPA.Text = "EMPA: " + Math.Round(((nEMPA / nEMPAqtde) * 100), nDecimais).ToString();
+                ArrayList alSaidaDesejada = StringToArray(TextBoxSaidaDesejada.Text, "\n", 1);
+                ArrayList alSaidaCalculada = StringToArray(TextBoxSaidaCalculada.Text, "\n", 1);
+                ArrayList alSaidaMaximo = StringToArray(TextBoxSaidaMax.Text, ";", 1);
+                
+                double nEMPAx = CalculaEMPA(alSaidaDesejada, alSaidaCalculada, alSaidaMaximo, DropDownListSeparador.SelectedValue, nDecimais);
+
+                CheckBoxEMPA.Text = "EMPA: " + nEMPAx.ToString(); // Math.Round(((nEMPA / nEMPAqtde) * 100), nDecimais).ToString();
             }
 
             //imprime o tempo do processamento.
@@ -1571,42 +1617,45 @@ public partial class _Default : System.Web.UI.Page
     {
         try
         {
-            if (LabelEntradasColunas.Text.Trim() == "0")
+            if (TextBoxEntradasMin.Text.Trim() == "")
             {
-                ButtonLer_Click(null, null);
-            }
+                if (LabelEntradasColunas.Text.Trim() == "0")
+                {
+                    ButtonLer_Click(null, null);
+                }
 
-            String sE = "";
-            for (int c = 0; c <= Convert.ToInt32(LabelEntradasColunas.Text) - 1; c++)
-            {
-                sE = sE + Minimo(TextBoxLerEntradas.Text, c) + ";";
-            }
-            sE = sE.Substring(0, sE.Length - 1);
-            TextBoxEntradasMin.Text = sE;
+                String sE = "";
+                for (int c = 0; c <= Convert.ToInt32(LabelEntradasColunas.Text) - 1; c++)
+                {
+                    sE = sE + Minimo(TextBoxLerEntradas.Text, c) + ";";
+                }
+                sE = sE.Substring(0, sE.Length - 1);
+                TextBoxEntradasMin.Text = sE;
 
-            sE = "";
-            for (int c = 0; c <= Convert.ToInt32(LabelEntradasColunas.Text) - 1; c++)
-            {
-                sE = sE + Maximo(TextBoxLerEntradas.Text, c) + ";";
-            }
-            sE = sE.Substring(0, sE.Length - 1);
-            TextBoxEntradasMax.Text = sE;
+                sE = "";
+                for (int c = 0; c <= Convert.ToInt32(LabelEntradasColunas.Text) - 1; c++)
+                {
+                    sE = sE + Maximo(TextBoxLerEntradas.Text, c) + ";";
+                }
+                sE = sE.Substring(0, sE.Length - 1);
+                TextBoxEntradasMax.Text = sE;
 
-            String sS = "";
-            for (int c = 0; c <= Convert.ToInt32(LabelSaidasColunas.Text) - 1; c++)
-            {
-                sS = sS + Minimo(TextBoxLerSaidas.Text, c) + ";";
-            }
-            sS = sS.Substring(0, sS.Length - 1);
-            TextBoxSaidaMin.Text = sS;
+                String sS = "";
+                for (int c = 0; c <= Convert.ToInt32(LabelSaidasColunas.Text) - 1; c++)
+                {
+                    sS = sS + Minimo(TextBoxLerSaidas.Text, c) + ";";
+                }
+                sS = sS.Substring(0, sS.Length - 1);
+                TextBoxSaidaMin.Text = sS;
 
-            sS = "";
-            for (int c = 0; c <= Convert.ToInt32(LabelSaidasColunas.Text) - 1; c++)
-            {
-                sS = sS + Maximo(TextBoxLerSaidas.Text, c) + ";";
+                sS = "";
+                for (int c = 0; c <= Convert.ToInt32(LabelSaidasColunas.Text) - 1; c++)
+                {
+                    sS = sS + Maximo(TextBoxLerSaidas.Text, c) + ";";
+                }
+                sS = sS.Substring(0, sS.Length - 1);
+                TextBoxSaidaMax.Text = sS;
             }
-            sS = sS.Substring(0, sS.Length - 1);
-            TextBoxSaidaMax.Text = sS;
         }
         catch
         {
@@ -1766,28 +1815,70 @@ public partial class _Default : System.Web.UI.Page
 
 
     //Calculo do Erro Médio Percentual Absoluto
-    private static double CalculaEMPA(string pReal, string pPrevisto)
+    private static double CalculaEMPA(ArrayList alReal, ArrayList alPrevisto, ArrayList alDesnormaliza, String sSeparador, int nDecimais)
     {
-        double nRetorno = 0;
+        double nErroAbsolutoPercentual = 0;
         try
         {
+            int nDesnormaliza = 0;
+            double nErroAbsoluto = 0;
+            double nErroAbsolutoTotal = 0;
+            for (int nIndiceReal = 0; nIndiceReal <= alReal.Count - 1; nIndiceReal++)
+            {
+                try
+                {
+                    if (nDesnormaliza >= alDesnormaliza.Count)
+                    {
+                        nDesnormaliza = 0;
+                    }
+                    double nReal = 0;
+                    double nDesnormalizado = 0;
+                    double nPrevisto = 0;
+                    if (sSeparador == "Vírgula")
+                    {
+                        try
+                        {
+                            nReal = Math.Round(Convert.ToDouble(alReal[nIndiceReal].ToString().Replace(".", ",").Replace("\r", "").Replace("\n", "")), nDecimais);
+                            nPrevisto = Math.Round(Convert.ToDouble(alPrevisto[nIndiceReal].ToString().Replace(".", ",").Replace("\r", "").Replace("\n", "")), nDecimais);
+                            nDesnormalizado = Math.Round(Convert.ToDouble(alDesnormaliza[nDesnormaliza].ToString().Replace(".", ",").Replace("\r", "").Replace("\n", "")), nDecimais);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            nReal = Math.Round(Convert.ToDouble(alReal[nIndiceReal].ToString().Replace(",", ".").Replace("\r", "").Replace("\n", "")), nDecimais);
+                            nPrevisto = Math.Round(Convert.ToDouble(alPrevisto[nIndiceReal].ToString().Replace(",", ".").Replace("\r", "").Replace("\n", "")), nDecimais);
+                            nDesnormalizado = Math.Round(Convert.ToDouble(alDesnormaliza[nDesnormaliza].ToString().Replace(",", ".").Replace("\r", "").Replace("\n", "")), nDecimais);
+                        }
+                        catch
+                        {
+                        }
+                    }
 
-            //def calculaerro(Real, Previsto):
-            //erroabsoluto = 0
-            //n = Real.size
-            //nLinhas = len(Real)
-            //nColunas = len(Real[0])
-            //for i in range(nLinhas):
-            //for j in range(nColunas):
-            //e = abs(Real[i][j] - Previsto[i][j]) / abs(Real[i][j])
-            //erroabsoluto += e
-            //erromedioabsoluto = erroabsoluto * 100 / n
-            //return erromedioabsoluto
+                    nReal = Math.Round(nReal * nDesnormalizado, 0); //desnormaliza
+                    if (nReal != 0)
+                    {
+                        nPrevisto = Math.Round(nPrevisto * nDesnormalizado, 0); //desnormaliza
+                        nErroAbsoluto = Math.Abs(Math.Round((nReal - nPrevisto) / nReal, 0)); //e = abs(Real[i][j] - Previsto[i][j]) / abs(Real[i][j])
+                        nErroAbsolutoTotal = Math.Round(nErroAbsolutoTotal + nErroAbsoluto, 0); //erroabsoluto += e
+                    }
+                    nDesnormaliza = nDesnormaliza + 1;
+                }
+                catch (Exception ex)
+                {
+                    String sEx = ex.Message;
+                }
+            }
+            nErroAbsolutoPercentual = Math.Round(nErroAbsolutoTotal * 100 / alReal.Count, 0); //erromedioabsoluto = erroabsoluto * 100 / n
         }
         catch
         {
         }
-        return (nRetorno);
+        return (nErroAbsolutoPercentual);
     }
 
 }
